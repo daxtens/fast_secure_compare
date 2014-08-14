@@ -1,0 +1,6 @@
+*.gem
+*.o
+*.so
+libsecure_compare.*
+*.dll
+*.bundle
