@@ -8,6 +8,7 @@ module FastSecureCompare
   attach_function :secure_compare_bytes, [:pointer, :uint, :pointer, :uint], :int
 
   def self.compare(secret, input)
+    return false if secret == "" and input != ""
     sBuf = FFI::MemoryPointer.new(:char, secret.size)
     sBuf.put_bytes(0, secret)
     iBuf = FFI::MemoryPointer.new(:char, input.size)

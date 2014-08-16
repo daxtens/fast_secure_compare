@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'fast_secure_compare'
-  s.version     = '0.0.2'
-  s.date        = '2014-08-17'
+  s.version     = '0.0.3'
+  s.date        = '2014-08-18'
   s.summary     = "A fast, simple way to do constant time string comparisons."
   s.description = "A secure_comparison function implemented in C for blazing speed."
   s.authors     = ["Daniel Axtens"]
