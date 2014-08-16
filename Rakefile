@@ -7,8 +7,8 @@ require 'rspec/core/rake_task'
 task :default => [:compile, :test]
 
 task :compile do
-    protect = ['secure_compare.c', 'secure_compare.h']
-    Dir["ext/secure_compare/**/*"].each do |file|
+    protect = ['secure_compare.c']
+    Dir["ext/fast_secure_compare/**/*"].each do |file|
         begin
             next if protect.include? File.basename(file)
             FileUtils.rm file

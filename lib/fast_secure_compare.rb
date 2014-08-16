@@ -1,9 +1,9 @@
 require 'ffi'
 require 'ffi-compiler/loader'
 
-module SecureCompare
+module FastSecureCompare
   extend FFI::Library
-  ffi_lib FFI::Compiler::Loader.find('secure_compare')
+  ffi_lib FFI::Compiler::Loader.find('fast_secure_compare')
   
   attach_function :secure_compare_bytes, [:pointer, :uint, :pointer, :uint], :int
 
