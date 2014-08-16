@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec'
   
-  s.files = Dir["{lib}/**/*"] + %w(Rakefile fast_secure_compare.gemspec README.md) # LICENSE)
+  s.files = Dir["{lib}/**/*"] + %w(Rakefile fast_secure_compare.gemspec README.md LICENSE)
   s.files += ["ext/fast_secure_compare/secure_compare.c"]
   s.test_files = Dir["spec/**/*"]
   s.extra_rdoc_files = ["README.md"]
