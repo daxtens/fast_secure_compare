@@ -6,3 +6,5 @@ libsecure_compare.*
 *.bundle
 Gemfile.lock
 Makefile
+tmp/
+pkg/
