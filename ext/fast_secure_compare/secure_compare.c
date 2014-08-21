@@ -1,5 +1,10 @@
-int secure_compare_bytes(const unsigned char * secret, unsigned int secret_len, 
-                         const unsigned char * input, unsigned int input_len) {
+#include <ruby.h>
+
+VALUE FSC_module = Qnil;
+
+int
+secure_compare_bytes(const unsigned char * secret, unsigned int secret_len, 
+                     const unsigned char * input, unsigned int input_len) {
 
     int input_pos;
     int secret_pos = 0;
@@ -12,4 +17,28 @@ int secure_compare_bytes(const unsigned char * secret, unsigned int secret_len,
     }
 
     return result;
+}
+
+static VALUE
+method_compare(VALUE self, VALUE secret, VALUE input) {
+    Check_Type(secret, T_STRING);
+    Check_Type(input, T_STRING);
+
+    // handle 0-length secrets
+    if (RSTRING_LEN(secret) == 0 && RSTRING_LEN(input) != 0) {
+        return Qfalse;
+    }
+
+    int result = (secure_compare_bytes(RSTRING_PTR(secret),
+                                       RSTRING_LEN(secret),
+                                       RSTRING_PTR(input),
+                                       RSTRING_LEN(input)) == 0);
+
+    return (result ? Qtrue : Qfalse);
+}
+
+void
+Init_fast_secure_compare(void) {
+    FSC_module = rb_define_module("FastSecureCompare");
+    rb_define_module_function(FSC_module, "compare", method_compare, 2);
 }
