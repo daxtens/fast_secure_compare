@@ -1,3 +1,7 @@
+# FastSecureCompare #
+[![Build Status](https://travis-ci.org/daxtens/fast_secure_compare.svg?branch=master)](https://travis-ci.org/daxtens/fast_secure_compare)
+[![Gem Version](https://badge.fury.io/rb/fast_secure_compare.svg)](http://badge.fury.io/rb/fast_secure_compare)
+
 This gem provides a simple, fast way to do string comparisons that resist timing attacks.
 
 # What is a timing attack? #
