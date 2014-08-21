@@ -4,3 +4,4 @@
 libsecure_compare.*
 *.dll
 *.bundle
+Gemfile.lock
