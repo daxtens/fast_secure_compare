@@ -1,3 +1,5 @@
 require 'ffi-compiler/compile_task'
 
-FFI::Compiler::CompileTask.new('fast_secure_compare')
+FFI::Compiler::CompileTask.new('fast_secure_compare') do |c|
+  c.cflags << " -O3"
+end

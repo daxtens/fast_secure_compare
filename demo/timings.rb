@@ -28,22 +28,17 @@ We check the following cases:
   4) Same as 2 but with a pure Ruby implementation of secure_compare.
   5) Same as 1 but with the C implementation in the secure_compare gem.
   6) Same as 2 but with the C implementation in the secure_compare gem.
-  7) Same as 1 but we SHA2 hash the strings then compare them with ==.
-  8) Same as 2 but we SHA2 hash the strings then compare them with ==.
 
-We do 100 tests of each case.
+We do 1000 tests of each case.
 
 We do two rounds of this:
 
  - To make the difference (especially in ==) really visible, we use a really long string:
     'The quick fox jumped over the lazy dogue.' repeated 1000 times.
 
- - For a more realistic test, we do a 2048 bit (256 byte) string.
+ - For a more realistic test, we do a 160 bit (40 byte) string, which is the length of a SHA1 hash.
 
 We change the first character for the early case, and the last character for the late case.
-
-(With regards to tests 7 and 8, a successful attack would also require an attack
-on a SHA2 hash function, which is what makes it safe to use ==.)
 
 Interpreting the results
 ========================
@@ -70,41 +65,41 @@ def compare(base_str)
   late_str[late_str.length-1] = '!'
 
   Benchmark.bmbm() do |b|
-      b.report("==, early fail")          {for i in 0..100 do
+      b.report("==, early fail")          {for i in 0..1000 do
                                              base_str == early_str
                                            end}
-      b.report("==, late fail")         {for i in 0..100 do
+      b.report("==, late fail")         {for i in 0..1000 do
                                            base_str == late_str
                                          end}
-      b.report("Pure Ruby secure_compare, 'early'") {for i in 0..100 do
+      b.report("Pure Ruby secure_compare, 'early'") {for i in 0..1000 do
                                                        secure_compare(base_str, early_str)
                                                      end}
-      b.report("Pure Ruby secure_compare, 'late'") {for i in 0..100 do
+      b.report("Pure Ruby secure_compare, 'late'") {for i in 0..1000 do
                                                       secure_compare(base_str, late_str)
                                                     end}
-      b.report("C-based FastSecureCompare, 'early'") {for i in 0..100 do
+      b.report("C-based FastSecureCompare, 'early'") {for i in 0..1000 do
                                                     FastSecureCompare.compare(base_str, early_str)
                                                   end}
-      b.report("C-based FastSecureCompare, 'late'") {for i in 0..100 do
+      b.report("C-based FastSecureCompare, 'late'") {for i in 0..1000 do
                                                    FastSecureCompare.compare(base_str, late_str)
                                                  end}
-      b.report("SHA2-then-==, 'early'") {for i in 0..100 do
-                                                    (Digest::SHA2.new << base_str).to_s == \
-                                                    (Digest::SHA2.new << early_str).to_s
-                                                  end}
-      b.report("SHA2-then-==, 'late'") {for i in 0..100 do
-                                                    (Digest::SHA2.new << base_str).to_s == \
-                                                    (Digest::SHA2.new << late_str).to_s
-                                                 end}
+      #b.report("SHA512-then-==, 'early'") {for i in 0..1000 do
+      #                                              Digest::SHA512.digest(base_str) == \
+      #                                              Digest::SHA512.digest(early_str)
+      #                                            end}
+      #b.report("SHA512-then-==, 'late'") {for i in 0..1000 do
+      #                                              Digest::SHA512.digest(base_str) == \
+      #                                              Digest::SHA512.digest(late_str)
+      #                                           end}
     end
 end
 
-puts ""
-puts "==== Long text ===="
-puts ""
-compare('The quick fox jumped over the lazy dogue.'*1000)
+#puts ""
+#puts "==== Long text ===="
+#puts ""
+#compare('The quick fox jumped over the lazy dogue.'*1000)
 
 puts ""
 puts "==== Short text ===="
 puts ""
-compare('abcdefgh'*32)
+compare('a'*40)
