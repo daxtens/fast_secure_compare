@@ -7,10 +7,10 @@ task :default => [:compile, :test]
 
 spec = Gem::Specification.new do |s|
   s.name        = 'fast_secure_compare'
-  s.version     = '0.1.0'
-  s.date        = '2014-08-21'
+  s.version     = '1.0.0'
+  s.date        = '2014-08-23'
   s.summary     = "A fast, simple way to do constant time string comparisons."
-  s.description = "A secure_comparison function implemented in C for blazing speed."
+  s.description = "A secure_comparison function implemented in C for blazing speed. Includes monkeypatch for Rails and Rack."
   s.authors     = ["Daniel Axtens"]
   s.email       = 'daniel@axtens.net'
   s.homepage    =
