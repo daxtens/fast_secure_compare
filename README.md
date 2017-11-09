@@ -1,3 +1,5 @@
+**Archived** - don't use this! It was an interesting experiment, but it probably doesn't help any reasonable use-case and is old and unmaintained.
+
 # FastSecureCompare #
 [![Build Status](https://travis-ci.org/daxtens/fast_secure_compare.svg?branch=master)](https://travis-ci.org/daxtens/fast_secure_compare)
 [![Gem Version](https://badge.fury.io/rb/fast_secure_compare.svg)](http://badge.fury.io/rb/fast_secure_compare)
