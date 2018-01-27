@@ -10,6 +10,8 @@ Gem::PackageTask.new(spec) do |pkg|
 end
 
 # feed the ExtensionTask with your spec
-Rake::ExtensionTask.new('fast_secure_compare', spec)
+Rake::ExtensionTask.new('fast_secure_compare') do |ext|
+  ext.lib_dir = "lib/fast_secure_compare"
+end
 
 RSpec::Core::RakeTask.new(:test)
